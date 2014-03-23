@@ -3,6 +3,7 @@
 use Illuminate\Support\MessageBag;
 use Illuminate\Session\Store as Session;
 use Illuminate\Config\Repository as Config;
+use Illuminate\Translation\Translator as Lang;
 use BadMethodCallException;
 
 class Notify extends MessageBag {
@@ -28,10 +29,11 @@ class Notify extends MessageBag {
 	 * @param  \Illuminate\Config\Repository $config
 	 * @return \Andheiberg\Notify\Notify
 	 */
-	public function __construct(Session $session, Config $config)
+	public function __construct(Session $session, Config $config, Lang $lang)
 	{
 		$this->config = $config;
 		$this->session = $session;
+		$this->lang = $lang;
 
 		parent::__construct($session->get($this->getSessionKey(), []));
 	}
@@ -57,6 +59,26 @@ class Notify extends MessageBag {
 	}
 
 	/**
+	 * Add a notification to the bag.
+	 *
+	 * @param  string  $key
+	 * @param  string  $message
+	 * @param  array   $replace
+	 * @return \Illuminate\Support\MessageBag
+	 */
+	public function addNotification($key, $message, $replace = array())
+	{
+		if ($this->lang->has($message))
+		{
+			$message = $this->lang->get($message, $replace);
+		}
+		
+		$this->add($key, $message);
+
+		$this->session->flash($this->getSessionKey(), $this->messages);
+	}
+
+	/**
 	 * Dynamically handle notify function calls.
 	 *
 	 * @param  string  $method
@@ -72,8 +94,10 @@ class Notify extends MessageBag {
 			throw new BadMethodCallException("Method [$method] does not exist.");
 		}
 
-		$this->add($method, $parameters[0]);
-		$this->session->flash($this->getSessionKey(), $this->messages);
+		$message = $parameters[0];
+		$replace = isset($parameters[1]) ? $parameters[1] : [];
+
+		$this->addNotification($method, $message, $replace);
 	}
 
 }

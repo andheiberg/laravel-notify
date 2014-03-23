@@ -1,6 +1,8 @@
 # Notify
 
-A highly extendable notification system with laravel integration.
+A site notification package for laravel.
+
+Currently let's you easily flash notifications to the session. It also supports laravels translation package out of the box.
 
 ## Table of Contents
 
@@ -64,6 +66,13 @@ Notify::error('Whoops, something has gone wrong.');
 ```
 
 You can of course add your own types by adding them to your own config file. [See above](#configuration) on how to publish the config file.
+
+You can also pass a language tag for easy localization.
+
+```php
+Notify::success('auth.login-successful'); // Calls Lang::get('auth.login-successful') behind the scene
+Notify::warning('auth.verification-email-sent', ['email' => 'test@gmail.com']) // You can also pass replacements
+```
 
 ### Displaying Notifications
 

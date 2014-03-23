@@ -16,7 +16,7 @@ class NotifyServiceProvider extends ServiceProvider {
 		// Register 'asset' instance container to our Asset object
 		$this->app['notify'] = $this->app->share(function($app)
 		{
-			return new Notify($app['session.store'], $app['config']);
+			return new Notify($app['session.store'], $app['config'], $app['translator']);
 		});
 	}
 
