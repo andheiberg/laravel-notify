@@ -93,3 +93,38 @@ Or if you'd like to display a single notification for a certain level.
 ```
 
 If you'd like to learn more ways on how you can display messages, please [take a closer look to Illuminate's `MessageBag` class](https://github.com/illuminate/support/blob/master/MessageBag.php).
+
+#### Bootstrap example
+```php
+@if (Notify::all())
+	<div class="container">
+		@foreach (Notify::get('success') as $alert)
+			<div class="alert alert-success">
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
+				{{ $alert }}
+			</div>
+		@endforeach
+
+		@foreach (Notify::get('error') as $alert)
+			<div class="alert alert-danger">
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
+				{{ $alert }}
+			</div>
+		@endforeach
+
+		@foreach (Notify::get('info') as $alert)
+			<div class="alert alert-info">
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
+				{{ $alert }}
+			</div>
+		@endforeach
+
+		@foreach (Notify::get('warning') as $alert)
+			<div class="alert alert-warning">
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
+				{{ $alert }}
+			</div>
+		@endforeach
+	</div>
+@endif
+```
