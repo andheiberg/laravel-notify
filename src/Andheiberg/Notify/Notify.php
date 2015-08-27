@@ -45,7 +45,7 @@ class Notify extends MessageBag {
 	 */
 	public function getTypes()
 	{
-		return (array) $this->config->get('notify::types');
+		return (array) $this->config->get('notify.types');
 	}
 
 	/**
@@ -55,7 +55,7 @@ class Notify extends MessageBag {
 	 */
 	public function getSessionKey()
 	{
-		return $this->config->get('notify::session_key');
+		return $this->config->get('notify.session_key');
 	}
 
 	/**

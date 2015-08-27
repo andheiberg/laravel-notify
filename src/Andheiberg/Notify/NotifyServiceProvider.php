@@ -5,17 +5,29 @@ use Illuminate\Support\ServiceProvider;
 class NotifyServiceProvider extends ServiceProvider {
 
 	/**
+	 * Bootstrap the application events.
+	 *
+	 * @return void
+	 */
+	public function boot()
+	{
+		$this->publishes([
+			__DIR__.'/../../config/notify.php' => config_path('notify.php'),
+		]);
+
+		$this->mergeConfigFrom(
+			__DIR__.'/../../config/notify.php', 'notify'
+		);
+	}
+
+	/**
 	 * Register the service provider.
 	 *
 	 * @return void
 	 */
 	public function register()
 	{
-		$this->package('andheiberg/notify', 'notify');
-
-		// Register 'asset' instance container to our Asset object
-		$this->app['notify'] = $this->app->share(function($app)
-		{
+		$this->app->bind('notify', function($app) {
 			return new Notify($app['session.store'], $app['config'], $app['translator']);
 		});
 	}
