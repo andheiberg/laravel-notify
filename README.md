@@ -19,7 +19,7 @@ You can install the package for your Laravel 4 project through Composer.
 Require the package in your `composer.json`.
 
 ```
-"andheiberg/notify": "1.*"
+"andheiberg/notify": "2.*"
 ```
 
 Run composer to install or update the package.
