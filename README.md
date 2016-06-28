@@ -13,31 +13,26 @@ Currently let's you easily flash notifications to the session. It also supports 
     - [Displaying Notifications](#displaying-notifications)
 
 ## Installation
-
-You can install the package for your Laravel 4 project through Composer.
-
-Require the package in your `composer.json`.
-
-```
-"andheiberg/notify": "2.*"
-```
-
-Run composer to install or update the package.
+You can install the package for your Laravel project through Composer.
 
 ```bash
-$ composer update
+# Laravel 4x
+composer require andheiberg/notify:1.*
+
+# Laravel 5x
+composer require andheiberg/notify:2.*
 ```
 
 Register the service provider in `app/config/app.php`.
 
 ```php
-'Andheiberg\Notify\NotifyServiceProvider',
+Andheiberg\Notify\NotifyServiceProvider::class,
 ```
 
 Add the alias to the list of aliases in `app/config/app.php`.
 
 ```php
-'Notify' => 'Andheiberg\Notify\Facades\Notify',
+'Notify' => Andheiberg\Notify\Facades\Notify::class,
 ```
 
 ## Configuration
@@ -47,7 +42,11 @@ The packages provides you with some configuration options.
 To create the configuration file run this command in your command line app:
 
 ```bash
-$ php artisan config:publish andheiberg/notify
+# Laravel 4x
+php artisan config:publish andheiberg/notify
+
+# Laravel 5x
+php artisan vendor:publish --provider="Andheiberg\Notify\NotifyServiceProvider"
 ```
 
 The configuration file will be published here: `app/config/packages/andheiberg/notify/config.php`.
