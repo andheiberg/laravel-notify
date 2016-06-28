@@ -26,20 +26,12 @@ composer require andheiberg/notify:2.*
 Register the service provider in `app/config/app.php`.
 
 ```php
-# Laravel 4x
-'Andheiberg\Notify\NotifyServiceProvider',
-
-# Laravel 5x
 Andheiberg\Notify\NotifyServiceProvider::class,
 ```
 
 Add the alias to the list of aliases in `app/config/app.php`.
 
 ```php
-# Laravel 4x
-'Notify' => 'Andheiberg\Notify\Facades\Notify',
-
-# Laravel 5x
 'Notify' => Andheiberg\Notify\Facades\Notify::class,
 ```
 
